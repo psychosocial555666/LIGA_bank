@@ -1,13 +1,15 @@
-$main-font: "Open Sans", "Arial", sans-serif;
+$main-font: "roboto", "Arial", sans-serif;
 
 $desktop: 1024px;
+$tablet: 1023px;
+$mobile: 767px;
 
 $white: #ffffff;
 $black: #000000;
-$dark: #1A212F;
-$light-grey: #F5F5F9;
-$grey: #D7D9DF;
-$main-text: #48494D;
-$accent: #D12136;
-$accent-hover: #BD0C21;
-$warning: #FF0000;
+$background: #F6F7FF;
+$text-color: #1F1E25;
+$grey-lines: #C1C2CA;
+$accent: #2C36F2;
+$accent-dark: #2028B6;
+// @media (max-width: $tablet) {}
+// @media (max-width: $mobile) {}
