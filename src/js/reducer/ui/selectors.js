@@ -7,6 +7,6 @@ export const getMenuStatus = (state) => {
   return state[NAME_SPACE].isMenuOpened;
 };
 
-export const getCurrentSlide = (state) => {
-  return state[NAME_SPACE].currentSlide;
+export const getTabType = (state) => {
+  return state[NAME_SPACE].tabType;
 };

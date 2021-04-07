@@ -49,11 +49,12 @@
 }
 
 .slider__point {
-  width: 8px;
-  height: 8px;
-  background-color: $accent-dark;
+  background: $accent-dark;
   border-radius: 50%;
   margin-right: 8px;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
 
   &:last-child {
     margin-right: 0;
@@ -62,6 +63,10 @@
 
 .slider__point--active {
   background-color: $background;
+
+  &:last-child {
+    background-color: #E0E0E0;
+  }
 }
 
 .slider__item--slide-one {
@@ -90,11 +95,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-  .slider__point--active {
-    background-color: #E0E0E0;
-    ;
-  }
 }
 
 @media (max-width: $tablet) {

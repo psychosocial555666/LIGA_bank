@@ -1,13 +1,14 @@
-import {extend, increaseSlide} from "./../../utils/utils.js";
+import { TabType } from "../../const.js";
+import {extend} from "./../../utils/utils.js";
 
 const ActionType = {
   CHANGE_MENU_STATUS: `CHANGE_MENU_STATUS`,
-  CHANGE_CURRENT_SLIDE: `CHANGE_CURRENT_SLIDE`,
+  SET_TAB_TYPE: `SET_TAB_TYPE`,
 };
 
 const initialState = {
   isMenuOpened: false,
-  currentSlide: 1,
+  tabType: TabType.DEPOSITS,
 };
 
 const ActionCreator = {
@@ -16,9 +17,9 @@ const ActionCreator = {
     type: ActionType.CHANGE_MENU_STATUS,
     payload: !status,
   }),
-  changeCurrnetSlide: (slide, maxSlides) => ({
-    type: ActionType.CHANGE_CURRENT_SLIDE,
-    payload: increaseSlide(slide, maxSlides),
+  setTabType: (type) => ({
+    type: ActionType.SET_TAB_TYPE,
+    payload: type,
   }),
 };
 
@@ -28,10 +29,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isMenuOpened: action.payload,
       });
-
-    case ActionType.CHANGE_CURRENT_SLIDE:
+    case ActionType.SET_TAB_TYPE:
       return extend(state, {
-        currentSlide: action.payload,
+        tabType: action.payload,
       });
     
     default:
