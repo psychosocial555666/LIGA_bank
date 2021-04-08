@@ -23,11 +23,18 @@ export const pinCoords = [
     lat: 54.99244,
     lng: 73.36859,
   },
-]
+];
 
 export const TabType = {
   DEPOSITS: 'DEPOSITS',
   CREDITS: 'CREDITS',
   INSURANCE: 'INSURANCE',
   ONLINE: 'ONLINE',
-}
+};
+
+export const menuItems = [
+  'Услуги',
+  'Рассчитать кредит',
+  'Контакты',
+  'Задать вопрос',
+];

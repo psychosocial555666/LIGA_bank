@@ -1,0 +1,8 @@
+.socials {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-column-gap: 15px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

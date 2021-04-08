@@ -10,3 +10,23 @@ export const getMenuStatus = (state) => {
 export const getTabType = (state) => {
   return state[NAME_SPACE].tabType;
 };
+
+export const getModalStatus = (state) => {
+  return state[NAME_SPACE].isModalOpened;
+};
+
+export const getLoginStatus = (state) => {
+  return state[NAME_SPACE].isLoginValid;
+};
+
+export const getPasswordStatus = (state) => {
+  return state[NAME_SPACE].isPasswordValid;
+};
+
+export const getPasswordShowStatus = (state) => {
+  return state[NAME_SPACE].isPasswordShown;
+};
+
+export const getLoginFormStatus = (state) => {
+  return state[NAME_SPACE].isLoginFormValid;
+};

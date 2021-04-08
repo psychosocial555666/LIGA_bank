@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 function Header(props) {
 
-  const {isMenuOpened, onMenuButtonClick} = props;
+  const {isMenuOpened, onMenuButtonClick, popupOpen} = props;
 
   return (
     <React.Fragment>
@@ -46,7 +46,7 @@ function Header(props) {
               </ul>
             </nav>
             <div className="page-header__auth">
-              <a href="#" className="page-header__link">
+              <a href="#" className="page-header__link" onClick={() => {popupOpen(true)}}>
                 <img src={auth} alt="Log-In"/>
                 <span>
                   Войти в Интернет-банк
@@ -72,6 +72,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onMenuButtonClick(status) {
     dispatch(ActionCreator.toggleMenu(status));
+  },
+
+  popupOpen(status) {
+    dispatch(ActionCreator.changeModalStatus(status));
   },
 });
 
