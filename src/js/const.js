@@ -38,3 +38,9 @@ export const menuItems = [
   'Контакты',
   'Задать вопрос',
 ];
+
+export const creditTypes = {
+  NONE: 'NONE',
+  MORTGAGE: 'MORTGAGE',
+  AUTO: 'AUTO',
+}

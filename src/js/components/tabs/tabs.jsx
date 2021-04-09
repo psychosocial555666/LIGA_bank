@@ -13,7 +13,7 @@ import appPhone from "../../../img/app-phone.png";
 import car from "../../../img/car.png";
 import lock from "../../../img/lock.png";
 
-function Header(props) {
+function Tabs(props) {
 
   const {
     tabType,
@@ -132,7 +132,7 @@ function Header(props) {
 };
 
 
-Header.propTypes = {
+Tabs.propTypes = {
   tabType: PropTypes.string,
 };
 
@@ -146,4 +146,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs);

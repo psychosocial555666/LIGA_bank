@@ -30,3 +30,11 @@ export const getPasswordShowStatus = (state) => {
 export const getLoginFormStatus = (state) => {
   return state[NAME_SPACE].isLoginFormValid;
 };
+
+export const getCreditSelectStatus = (state) => {
+  return state[NAME_SPACE].isCreditTypeSelectOpened;
+};
+
+export const getCurrentCreditType = (state) => {
+  return state[NAME_SPACE].currentCreditType;
+};

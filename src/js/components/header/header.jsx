@@ -46,7 +46,10 @@ function Header(props) {
               </ul>
             </nav>
             <div className="page-header__auth">
-              <a href="#" className="page-header__link" onClick={() => {popupOpen(true)}}>
+              <a href="#" className="page-header__link" onClick={(evt) => {
+                evt.preventDefault();
+                popupOpen(true)}
+                }>
                 <img src={auth} alt="Log-In"/>
                 <span>
                   Войти в Интернет-банк

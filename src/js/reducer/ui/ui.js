@@ -1,14 +1,16 @@
-import { TabType } from "../../const.js";
+import { creditTypes, TabType } from "../../const.js";
 import { extend } from "./../../utils/utils.js";
 
 const ActionType = {
   CHANGE_MENU_STATUS: `CHANGE_MENU_STATUS`,
   CHANGE_MODAL_STATUS: `CHANGE_MODAL_STATUS`,
+  CHANGE_CREDIT_SELECT_STATUS: `CHANGE_CREDIT_SELECT_STATUS`,
   CHANGE_LOGIN_VALIDITY: `CHANGE_LOGIN_VALIDITY`,
   CHANGE_PASSWORD_VALIDITY: `CHANGE_PASSWORD_VALIDITY`,
   CHANGE_PASSWORD_SHOW_STATUS: `CHANGE_PASSWORD_SHOW_STATUS`,
   CHANGE_LOGIN_FORM_VALIDITY: `CHANGE_LOGIN_FORM_VALIDITY`,
   SET_TAB_TYPE: `SET_TAB_TYPE`,
+  SET_CREDIT_TYPE: `SET_CREDIT_TYPE`,
 };
 
 const initialState = {
@@ -18,7 +20,9 @@ const initialState = {
   isPasswordValid: true,
   isPasswordShown: false,
   isLoginFormValid: true,
+  isCreditTypeSelectOpened: false,
   tabType: TabType.DEPOSITS,
+  currentCreditType: creditTypes.MORTGAGE,
 };
 
 const ActionCreator = {
@@ -30,6 +34,10 @@ const ActionCreator = {
   changeModalStatus: (status) => ({
     type: ActionType.CHANGE_MODAL_STATUS,
     payload: status,
+  }),
+  changeCreditSelectStatus: (status) => ({
+    type: ActionType.CHANGE_CREDIT_SELECT_STATUS,
+    payload: !status,
   }),
   setTabType: (type) => ({
     type: ActionType.SET_TAB_TYPE,
@@ -51,6 +59,10 @@ const ActionCreator = {
     type: ActionType.CHANGE_LOGIN_FORM_VALIDITY,
     payload: status,
   }),
+  setCreditType: (type) => ({
+    type: ActionType.SET_CREDIT_TYPE,
+    payload: type,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -63,9 +75,17 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isModalOpened: action.payload,
       });
+    case ActionType.CHANGE_CREDIT_SELECT_STATUS:
+      return extend(state, {
+        isCreditTypeSelectOpened: action.payload,
+      });
     case ActionType.SET_TAB_TYPE:
       return extend(state, {
         tabType: action.payload,
+      });
+    case ActionType.SET_CREDIT_TYPE:
+      return extend(state, {
+        currentCreditType: action.payload,
       });
     case ActionType.CHANGE_LOGIN_VALIDITY:
       return extend(state, {

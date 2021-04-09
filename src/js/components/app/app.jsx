@@ -6,6 +6,7 @@ import Modal from "../modal/modal";
 import {connect} from "react-redux";
 import {getModalStatus} from "../../reducer/ui/selectors";
 import Footer from "../footer/footer";
+import Calculator from "../calculator/calculator";
 
 function App(props) {
 
@@ -17,6 +18,7 @@ function App(props) {
       <Header />
       <Slider />
       <Services />
+      <Calculator />
       <div className="container">
         <SimpleMap />
       </div>
