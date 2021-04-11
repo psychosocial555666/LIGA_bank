@@ -17,9 +17,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-maps": "^9.4.5",
+    "react-input-mask": "^2.0.4",
     "react-redux": "^7.2.3",
     "react-scripts": "4.0.3",
-    "react-sizeme": "^3.0.1",
     "redux": "^4.0.5",
     "swiper": "^6.5.4",
     "web-vitals": "^1.1.1"

@@ -1,5 +1,5 @@
 import { creditTypes, TabType } from "../../const.js";
-import { extend } from "./../../utils/utils.js";
+import { extend, initiateParametres } from "./../../utils/utils.js";
 
 const ActionType = {
   CHANGE_MENU_STATUS: `CHANGE_MENU_STATUS`,
@@ -11,6 +11,7 @@ const ActionType = {
   CHANGE_LOGIN_FORM_VALIDITY: `CHANGE_LOGIN_FORM_VALIDITY`,
   SET_TAB_TYPE: `SET_TAB_TYPE`,
   SET_CREDIT_TYPE: `SET_CREDIT_TYPE`,
+  UPDATE_CREDIT_PARAMETRES: `UPDATE_CREDIT_PARAMETRES`,
 };
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
   isLoginFormValid: true,
   isCreditTypeSelectOpened: false,
   tabType: TabType.DEPOSITS,
-  currentCreditType: creditTypes.MORTGAGE,
+  currentCreditType: creditTypes.NONE,
+  creditParametres: {},
 };
 
 const ActionCreator = {
@@ -63,6 +65,10 @@ const ActionCreator = {
     type: ActionType.SET_CREDIT_TYPE,
     payload: type,
   }),
+  updateCreditParametres: (parametres) => ({
+    type: ActionType.UPDATE_CREDIT_PARAMETRES,
+    payload: parametres,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -86,6 +92,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_CREDIT_TYPE:
       return extend(state, {
         currentCreditType: action.payload,
+        creditParametres: initiateParametres(action.payload),
       });
     case ActionType.CHANGE_LOGIN_VALIDITY:
       return extend(state, {
@@ -102,6 +109,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_LOGIN_FORM_VALIDITY:
       return extend(state, {
         isLoginFormValid: action.payload,
+      });
+    case ActionType.UPDATE_CREDIT_PARAMETRES:
+      return extend(state, {
+        creditParametres: action.payload,
       });
 
     default:

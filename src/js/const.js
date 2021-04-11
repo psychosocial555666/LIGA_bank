@@ -1,6 +1,7 @@
 export const ESC_KEY = 27;
 export const SCREEN_LATITUDE = 56.8519;
 export const SCREEN_LONGITUDE = 60.6122;
+export const MAX_PERCENT = 100;
 
 export const pinCoords = [
   {

@@ -29,18 +29,26 @@ function StepOne(props) {
       <div className="calculator__step step-one">
         <h3>Шаг 1. Цель кредита</h3>
         <div className={isCreditTypeSelectOpened ? "step-one__control step-one__control--opened" : "step-one__control"}>
-          <p className="step-one__select" onClick={() => {onSelectClick(isCreditTypeSelectOpened)}}>{selectText}</p>
+          <p className="step-one__select" 
+          onClick={() => {onSelectClick(isCreditTypeSelectOpened)}} 
+          tabIndex="1"
+          onFocus={() => {onSelectClick(isCreditTypeSelectOpened)}}
+          >{selectText}</p>
           <div className="step-one__options">
-            <span className="step-one__option" onClick={() => {
+            <span className="step-one__option" 
+            onClick={() => {
                 onOptionClick(creditTypes.MORTGAGE);
                 onSelectClick(isCreditTypeSelectOpened);
               }}
+            tabIndex="1"
             >Ипотечное кредитование</span>
-            <span className="step-one__option" onClick={() => {
+            <span className="step-one__option" 
+            onClick={() => {
               onOptionClick(creditTypes.AUTO);
               onSelectClick(isCreditTypeSelectOpened);
               }
             }
+            tabIndex="1"
               >Автомобильное кредитование</span>
           </div>
         </div>
