@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import { creditTypes } from "../../const";
 import {getCurrentCreditType} from "../../reducer/ui/selectors";
 import {ActionCreator} from "../../reducer/ui/ui.js";
+import Offer from "../offer/offer";
 import StepOne from "../step-one/step-one";
 import StepTwo from "../step-two/step-two";
 
@@ -21,6 +22,7 @@ function Calculator(props) {
               <StepOne />
               {currentCreditType === creditTypes.NONE ? '' : <StepTwo />}
             </div>
+            {currentCreditType === creditTypes.NONE ? '' : <Offer />}
           </div>
         </div>
       </section>

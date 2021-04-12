@@ -53,7 +53,7 @@
   &::before {
     content: 'Некорректное значение';
     position: absolute;
-    bottom: 0;
+    bottom: -15px;
     right: 0;
     color: red;
     font-size: 12px;
@@ -109,6 +109,11 @@
   font-size: 14px;
   line-height: 140%;
   color: $inactive;
+
+  output {
+    display: flex;
+    justify-content: space-between;
+  }
 
   input {
     position: relative;

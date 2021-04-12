@@ -1,7 +1,10 @@
 .calculator__content {
   padding: 40px 0;
+  display: flex;
+  flex-wrap: wrap;
 
   h2 {
+    width: 100%;
     font-weight: 700;
     font-size: 41px;
     line-height: 140%;
@@ -12,6 +15,7 @@
 }
 
 .calculator__wrapper {
+  width: 100%;
   max-width: 600px;
 }
 

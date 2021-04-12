@@ -7,10 +7,11 @@ import SwiperCore, {Pagination, Autoplay} from 'swiper';
 SwiperCore.use([Pagination, Autoplay]);
 
 function Slider(props) {
+
   return (
     <Swiper className="slider"
     spaceBetween={0}
-    cssMode={true}
+    // cssMode={true}
     loop={true}
     autoplay={{
       delay: 4000,

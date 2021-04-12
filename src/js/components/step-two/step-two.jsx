@@ -4,8 +4,8 @@ import {getCreditParametres, getCurrentCreditType} from "../../reducer/ui/select
 import {ActionCreator} from "../../reducer/ui/ui.js";
 import plus from "../../../img/plus.svg";
 import minus from "../../../img/minus.svg";
-import { creditTypes, MAX_PERCENT } from "../../const";
-import { maskThisValue, extend, increasePrice, reducePrice, checkValueValidity, returnCorrectValue, percentToSum, sumToPercent } from "../../utils/utils";
+import { creditTypes, MAX_PERCENT} from "../../const";
+import { maskThisValue, extend, increasePrice, reducePrice, checkValueValidity, returnCorrectValue, percentToSum, sumToPercent, returnMortgagePercent, returnMortgageSum, returnMonthlyCreditPercent, returnTimeInMonths, calculatePayment, calculateMinIncome, returnAutoPercent, returnAutoSum, maskThisTime } from "../../utils/utils";
 
 class StepTwo extends React.PureComponent {
   constructor(props) {
@@ -31,41 +31,124 @@ class StepTwo extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.priceRef.current.value = maskThisValue(this.props.creditParametres.price, ` рублей`);
+    const {creditParametres} = this.props;
+    const {
+      price,
+      initialPercent,
+      time,
+    } = creditParametres;
+    this.priceRef.current.value = maskThisValue(price, ` рублей`);
     this._countInitialSum();
     this.persentInputRef.current.value = maskThisValue(String(this.initialSum), ` рублей`);
-    this.persentSliderRef.current.value = this.props.creditParametres.initialPercent;
-    this.timeInputRef.current.value = maskThisValue(String(this.props.creditParametres.time), ` лет`);
-    this.timeSliderRef.current.value = this.props.creditParametres.time;
+    this.persentSliderRef.current.value = initialPercent;
+    this.timeInputRef.current.value = maskThisValue(String(time), ` лет`);
+    this.timeSliderRef.current.value = time;
   }
 
   componentDidUpdate() {
-    this.priceRef.current.value = maskThisValue(this.props.creditParametres.price, ` рублей`);
+    const {creditParametres} = this.props;
+    const {
+      price,
+      initialPercent,
+      time,
+    } = creditParametres;
+
+    this.priceRef.current.value = maskThisValue(price, ` рублей`);
     this.priceRef.current.parentNode.parentNode.classList.remove('step-two__item--invalid');
     this.persentInputRef.current.parentNode.classList.remove('step-two__item--invalid');
     this.timeInputRef.current.parentNode.classList.remove('step-two__item--invalid');
     this._countInitialSum();
     this.persentInputRef.current.value = maskThisValue(String(Math.round(this.initialSum)), ` рублей`);
-    this.persentSliderRef.current.value = this.props.creditParametres.initialPercent;
-    this.timeInputRef.current.value = maskThisValue(String(this.props.creditParametres.time), ` лет`);
-    this.timeSliderRef.current.value = this.props.creditParametres.time;
+    this.persentSliderRef.current.value = initialPercent;
+    this.timeInputRef.current.value = maskThisTime(time);
+    this.timeSliderRef.current.value = time;
+  }
+
+  _updateCalculator(updatedParametr) {
+    const {creditParametres, currentCreditType} = this.props;
+    const updatedParametres = extend(creditParametres, updatedParametr);
+    const {
+      price,
+      initialPercent,
+      time,
+      minCreditSum,
+      capital,
+      casco,
+      insurance,
+    } = updatedParametres;
+
+    return this._calculateCreditOffer(currentCreditType, price, initialPercent, time, minCreditSum, capital, casco, insurance);
+  }
+
+  _calculateCreditOffer(type, price, initial, time, minCreditSum, capital, casco, insurance) {
+    if(type === creditTypes.MORTGAGE) {
+      let mortgagePercent = returnMortgagePercent(initial);
+      let creditSum = returnMortgageSum(price, initial, capital, minCreditSum);
+      let monthlyPercent = returnMonthlyCreditPercent(mortgagePercent);
+      let timeInMonths = returnTimeInMonths(time);
+      let monthlyPayment = calculatePayment(creditSum, monthlyPercent, timeInMonths);
+      let minIncome = calculateMinIncome(monthlyPayment)
+      if(creditSum) {
+        return(
+          {
+            creditPercent: mortgagePercent,
+            creditSum: creditSum,
+            payment: monthlyPayment,
+            income: minIncome,
+            isOfferCorrect: true,
+          }
+        );
+      } else {
+        return(
+          {
+            isOfferCorrect: false,
+          }
+        );
+      }
+    }
+
+    if(type === creditTypes.AUTO) {
+      let autoPercent = returnAutoPercent(price, casco, insurance);
+      let creditSum = returnAutoSum(price, initial, minCreditSum);
+      let monthlyPercent = returnMonthlyCreditPercent(autoPercent);
+      let timeInMonths = returnTimeInMonths(time);
+      let monthlyPayment = calculatePayment(creditSum, monthlyPercent, timeInMonths);
+      let minIncome = calculateMinIncome(monthlyPayment)
+      if(creditSum) {
+        return(
+          {
+            creditPercent: autoPercent,
+            creditSum: creditSum,
+            payment: monthlyPayment,
+            income: minIncome,
+            isOfferCorrect: true,
+          }
+        );
+      } else {
+        return(
+          {
+            isOfferCorrect: false,
+          }
+        );
+      }
+    }
+  }
+
+  _applyNewParametres(parametr) {
+    const {creditParametres, updateCreditParametres}= this.props;
+
+    let newParametres = extend(creditParametres, extend(this._updateCalculator(parametr), parametr));
+    updateCreditParametres(newParametres);
   }
 
   _priceButtonIncreaseHandler(value, step, maxValue) {
-    const {creditParametres, updateCreditParametres}= this.props;
     let result = increasePrice(value, step, maxValue);
-
-    let newParametres = extend(creditParametres, {price: result});
-    updateCreditParametres(newParametres);
+    this._applyNewParametres({price: result});
   }
 
   _priceButtonReduceHandler(value, step, minValue) {
-    const {creditParametres, updateCreditParametres}= this.props;
-    
     let result = reducePrice(value, step, minValue);
-
-    let newParametres = extend(creditParametres, {price: result});
-    updateCreditParametres(newParametres);
+    this._applyNewParametres({price: result});
   }
 
   _itemInputChangeHandler(value, minValue, maxValue, item) {
@@ -78,79 +161,58 @@ class StepTwo extends React.PureComponent {
   }
 
   _priceInputBlurHandler(evt, minValue, maxValue) {
-    const {creditParametres, updateCreditParametres}= this.props;
     let value = evt.target.value;
 
     let result = returnCorrectValue(value, minValue, maxValue);
-    let newParametres = extend(creditParametres, {price: result});
-    updateCreditParametres(newParametres);
+    this._applyNewParametres({price: result});
   }
 
   _initialInputBlurHandler(evt, minValue, maxValue, price) {
-    const {creditParametres, updateCreditParametres}= this.props;
     let value = evt.target.value;
 
     let result = returnCorrectValue(value, minValue, maxValue);
-    let newParametres = extend(creditParametres, {
+    this._applyNewParametres({
       initialPercent: sumToPercent(price, result)
     });
-    updateCreditParametres(newParametres);
   }
 
   _timeInputBlurHandler(evt, minValue, maxValue) {
-    const {creditParametres, updateCreditParametres}= this.props;
     let value = evt.target.value;
 
     let result = returnCorrectValue(value, minValue, maxValue);
-    let newParametres = extend(creditParametres, {
+    this._applyNewParametres({
       time: result,
     });
-    updateCreditParametres(newParametres);
   }
 
   _initialSliderChangeHandler(evt) {
-    const {creditParametres, updateCreditParametres}= this.props;
-
-    let newParametres = extend(creditParametres, {
+    this._applyNewParametres({
       initialPercent: Number(evt.target.value)
     });
-    updateCreditParametres(newParametres);
   }
 
   _timeSliderChangeHandler(evt) {
-    const {creditParametres, updateCreditParametres}= this.props;
-
-    let newParametres = extend(creditParametres, {
+    this._applyNewParametres({
       time: Number(evt.target.value)
     });
-    updateCreditParametres(newParametres);
   }
 
   _capitalCheckboxChangeHandler(evt) {
-    const {creditParametres, updateCreditParametres}= this.props;
-
-    let newParametres = extend(creditParametres, {
+    this._applyNewParametres({
       capital: evt.target.checked,
     });
-    updateCreditParametres(newParametres);
   }
 
   _cascoCheckboxChangeHandler(evt) {
-    const {creditParametres, updateCreditParametres}= this.props;
-
-    let newParametres = extend(creditParametres, {
+    this._applyNewParametres({
       casco: evt.target.checked,
     });
-    updateCreditParametres(newParametres);
   }
 
   _insuranceCheckboxChangeHandler(evt) {
-    const {creditParametres, updateCreditParametres}= this.props;
-
-    let newParametres = extend(creditParametres, {
+    this._applyNewParametres({
       insurance: evt.target.checked,
     });
-    updateCreditParametres(newParametres);
   }
 
   _countInitialSum() {
@@ -229,7 +291,10 @@ class StepTwo extends React.PureComponent {
             onBlur={(evt) => {this._timeInputBlurHandler(evt, minTime, maxTime)}}
             />
             <div className="step-two__slider">
-                <output htmlFor="slider">{`${time} лет`}</output> 
+                <output htmlFor="slider">
+                  <span>{maskThisTime(minTime)}</span>
+                  <span>{maskThisTime(maxTime)}</span>
+                </output> 
                 <input type="range" id="slider" 
                 ref={this.timeSliderRef}
                 min={minTime} 

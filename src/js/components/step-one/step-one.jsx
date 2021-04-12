@@ -32,7 +32,6 @@ function StepOne(props) {
           <p className="step-one__select" 
           onClick={() => {onSelectClick(isCreditTypeSelectOpened)}} 
           tabIndex="1"
-          onFocus={() => {onSelectClick(isCreditTypeSelectOpened)}}
           >{selectText}</p>
           <div className="step-one__options">
             <span className="step-one__option" 
