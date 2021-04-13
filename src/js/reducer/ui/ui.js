@@ -25,6 +25,8 @@ const initialState = {
   tabType: TabType.DEPOSITS,
   currentCreditType: creditTypes.NONE,
   creditParametres: {},
+  isRequestOpened: true,
+  requestNumber: '0001',
 };
 
 const ActionCreator = {

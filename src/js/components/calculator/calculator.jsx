@@ -1,15 +1,17 @@
 import React from "react";
 import {connect} from "react-redux";
 import { creditTypes } from "../../const";
-import {getCurrentCreditType} from "../../reducer/ui/selectors";
+import {getCurrentCreditType, getRequestStatus} from "../../reducer/ui/selectors";
 import {ActionCreator} from "../../reducer/ui/ui.js";
 import Offer from "../offer/offer";
 import StepOne from "../step-one/step-one";
+import StepThree from "../step-three/step-three";
 import StepTwo from "../step-two/step-two";
 
 function Calculator(props) {
   const {
     currentCreditType,
+    isRequestOpened,
   } = props;
 
   return (
@@ -19,11 +21,14 @@ function Calculator(props) {
           <div className="calculator__content">
             <h2>Кредитный калькулятор</h2>
             <div className="calculator__wrapper">
-              <StepOne />
-              {currentCreditType === creditTypes.NONE ? '' : <StepTwo />}
+              <div className="calculator__parametres">
+                <StepOne />
+                {currentCreditType === creditTypes.NONE ? '' : <StepTwo />}
+              </div>
+              {currentCreditType === creditTypes.NONE ? '' : <Offer />}
             </div>
-            {currentCreditType === creditTypes.NONE ? '' : <Offer />}
           </div>
+          {currentCreditType !== creditTypes.NONE && isRequestOpened ? <StepThree /> : ''}
         </div>
       </section>
     </React.Fragment>
@@ -32,6 +37,7 @@ function Calculator(props) {
 
 const mapStateToProps = (state) => ({
   currentCreditType: getCurrentCreditType(state),
+  isRequestOpened: getRequestStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

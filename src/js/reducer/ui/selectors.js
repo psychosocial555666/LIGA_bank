@@ -42,3 +42,11 @@ export const getCurrentCreditType = (state) => {
 export const getCreditParametres = (state) => {
   return state[NAME_SPACE].creditParametres;
 };
+
+export const getRequestNumber = (state) => {
+  return state[NAME_SPACE].requestNumber;
+};
+
+export const getRequestStatus = (state) => {
+  return state[NAME_SPACE].isRequestOpened;
+};

@@ -151,10 +151,13 @@ class StepTwo extends React.PureComponent {
     this._applyNewParametres({price: result});
   }
 
+  _keyPressHandler(evt) {
+    const keyCode = evt.keyCode || evt.which;
+    const keyValue = String.fromCharCode(keyCode);
+    if (!/^[0-9]+$/.test(keyValue)) evt.preventDefault();
+  }
+
   _itemInputChangeHandler(value, minValue, maxValue, item) {
-    if(!/^[0-9]+$/.test(value)) {
-      this.priceRef.current.value = "";
-    }
     checkValueValidity(value, minValue, maxValue) ? 
       item.classList.add('step-two__item--invalid') : 
       item.classList.remove('step-two__item--invalid');
@@ -249,6 +252,7 @@ class StepTwo extends React.PureComponent {
               <input type="text" id="price" 
               ref={this.priceRef}
               onFocus={(evt) => {evt.target.value = price}}
+              onKeyPress={this._keyPressHandler}
               onChange={(evt) => {this._itemInputChangeHandler(evt.target.value, minPrice, maxPrice, evt.target.parentNode.parentNode)}}
               onBlur={(evt) => {this._priceInputBlurHandler(evt, minPrice, maxPrice)}} 
               />
@@ -266,6 +270,7 @@ class StepTwo extends React.PureComponent {
             <label htmlFor="initial">Первоначальный взнос</label>
             <input type="text" id="initial" 
             ref={this.persentInputRef}
+            onKeyPress={this._keyPressHandler}
             onFocus={(evt) => {evt.target.value = this.initialSum}}
             onChange={(evt) => {this._itemInputChangeHandler(evt.target.value, percentToSum(price, minInitialPercent), percentToSum(price, MAX_PERCENT), evt.target.parentNode)}}
             onBlur={(evt) => {this._initialInputBlurHandler(evt, percentToSum(price, minInitialPercent), percentToSum(price, MAX_PERCENT), price)}}
@@ -286,6 +291,7 @@ class StepTwo extends React.PureComponent {
             <label htmlFor="time">Срок кредитования</label>
             <input type="text" id="time"
             ref={this.timeInputRef}
+            onKeyPress={this._keyPressHandler}
             onFocus={(evt) => {evt.target.value = time}}
             onChange={(evt) => {this._itemInputChangeHandler(evt.target.value, minTime, maxTime, evt.target.parentNode)}}
             onBlur={(evt) => {this._timeInputBlurHandler(evt, minTime, maxTime)}}
