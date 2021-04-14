@@ -1,16 +1,22 @@
+.step-two {
+  h3 {
+    margin-bottom: 17px;
+  }
+}
+
 .step-two__item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 
   input[type="text"] {
-    padding: 18px 24px;
+    padding: 16px 24px;
     margin: 0;
     width: 100%;
     border: 1px solid $text-color;
     border-radius: 4px;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 140%;
     text-align: center;
 
@@ -63,7 +69,16 @@
 .step-two__cover {
   position: relative;
   width: 100%;
-  margin-bottom: 3px;
+  margin-bottom: 7px;
+}
+
+.step-two__item--time {
+  margin-bottom: 22px;
+
+  .step-two__slider {
+    height: 48px;
+    padding-top: 17px;
+  }
 }
 
 .step-two__price-control {
@@ -101,7 +116,7 @@
 .step-two__slider {
   position: relative;
   width: 100%;
-  height: 47px;
+  height: 54px;
   display: flex;
   flex-direction: column-reverse;
   justify-content: space-between;
@@ -139,7 +154,6 @@
 }
 
 .step-two__item--additional {
-  
   input {
 
     &:hover,
@@ -166,11 +180,45 @@
       content: "";
       position: absolute;
       top: 2px;
-      left: 0;
+      left: -1px;
       width: 16px;
       height: 16px;
       border-radius: 2px;
       border: 1px solid $accent
+    }
+  }
+}
+
+@media (max-width: $tablet) {
+  .step-two {
+    padding-top: 35px;
+
+    h3 {
+      margin-bottom: 13px;
+    }
+  }
+
+  .step-two__item {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: $mobile) {
+  .step-two {
+    padding-top: 25px;
+
+    h3 {
+      margin-bottom: 9px;
+    }
+  }
+
+  .step-two__item {
+    margin-bottom: 10px;
+  }
+
+  .step-two__item--additional {
+    label {
+      font-size: 14px;
     }
   }
 }

@@ -6,6 +6,9 @@
 .step-one__select {
   padding: 18px 24px;
   position: relative;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
   margin: 0;
   border: 1px solid $text-color;
   border-radius: 4px;
@@ -13,12 +16,18 @@
   font-size: 16px;
   line-height: 140%;
   cursor: pointer;
+  display: block;
+
+  &:hover,
+  &:focus {
+    border: 1px solid $accent;
+  }
 
   &::before {
     content: "";
     position: absolute;
-    top: 24px;
-    right: 24px;
+    top: 23px;
+    right: 22px;
     width: 18px;
     height: 11px;
     background-image: url("../../img/arrow-down.svg");
@@ -42,6 +51,7 @@
 
 .step-one__option {
   padding: 18px 24px;
+  border: none;
   border-bottom: 1px solid $grey-lines;
   font-weight: 500;
   font-size: 16px;
@@ -51,6 +61,11 @@
 
   &:last-child {
     border: none;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.6;
   }
 }
 
@@ -65,5 +80,16 @@
 
   .step-one__options {
     display: flex;
+  }
+}
+
+@media (max-width: $mobile) {
+  .step-one__select {
+    padding: 18px 14px;
+
+    &::before {
+      top: 24px;
+      right: 13px;
+    }
   }
 }

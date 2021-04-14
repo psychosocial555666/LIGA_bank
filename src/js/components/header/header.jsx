@@ -6,8 +6,9 @@ import menu from "../../../img/menu.svg";
 import close from "../../../img/close.svg";
 import {connect} from "react-redux";
 import {getMenuStatus} from "../../reducer/ui/selectors";
-import {ActionCreator} from "../../reducer/ui/ui.js"
+import {ActionCreator} from "../../reducer/ui/ui.js";
 import PropTypes from 'prop-types';
+import {ModalType} from "../../const";
 
 function Header(props) {
 
@@ -48,7 +49,7 @@ function Header(props) {
             <div className="page-header__auth">
               <a href="#" className="page-header__link" onClick={(evt) => {
                 evt.preventDefault();
-                popupOpen(true)}
+                popupOpen(ModalType.LOGIN)}
                 }>
                 <img src={auth} alt="Log-In"/>
                 <span>
@@ -66,6 +67,8 @@ function Header(props) {
 
 Header.propTypes = {
   isMenuOpened: PropTypes.bool,
+  onMenuButtonClick: PropTypes.func,
+  popupOpen: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -77,8 +80,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.toggleMenu(status));
   },
 
-  popupOpen(status) {
-    dispatch(ActionCreator.changeModalStatus(status));
+  popupOpen(type) {
+    dispatch(ActionCreator.changeModalType(type));
   },
 });
 

@@ -11,7 +11,7 @@ function Slider(props) {
   return (
     <Swiper className="slider"
     spaceBetween={0}
-    // cssMode={true}
+    cssMode={true}
     loop={true}
     autoplay={{
       delay: 4000,
@@ -51,7 +51,7 @@ function Slider(props) {
         <div className="slider__content">
           <h1>Лига Банк</h1>
           <p>Всегда рядом</p>
-          <a href="#offices" className="slider__button button">Найти отделение</a>
+          <a href="#map" className="slider__button button">Найти отделение</a>
         </div>
       </div>
     </article>

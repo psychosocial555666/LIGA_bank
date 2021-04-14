@@ -1,9 +1,9 @@
-import { creditTypes, TabType } from "../../const.js";
-import { extend, initiateParametres } from "./../../utils/utils.js";
+import { creditTypes, ModalType, TabType } from "../../const.js";
+import { countRequestNumber, extend, initiateParametres } from "./../../utils/utils.js";
 
 const ActionType = {
   CHANGE_MENU_STATUS: `CHANGE_MENU_STATUS`,
-  CHANGE_MODAL_STATUS: `CHANGE_MODAL_STATUS`,
+  CHANGE_MODAL_TYPE: `CHANGE_MODAL_TYPE`,
   CHANGE_CREDIT_SELECT_STATUS: `CHANGE_CREDIT_SELECT_STATUS`,
   CHANGE_LOGIN_VALIDITY: `CHANGE_LOGIN_VALIDITY`,
   CHANGE_PASSWORD_VALIDITY: `CHANGE_PASSWORD_VALIDITY`,
@@ -12,11 +12,13 @@ const ActionType = {
   SET_TAB_TYPE: `SET_TAB_TYPE`,
   SET_CREDIT_TYPE: `SET_CREDIT_TYPE`,
   UPDATE_CREDIT_PARAMETRES: `UPDATE_CREDIT_PARAMETRES`,
+  INCREASE_REQEST_NUMBER: 'INCREASE_REQEST_NUMBER',
+  CHANGE_REQEST_STATUS: `CHANGE_REQEST_STATUS`,
 };
 
 const initialState = {
   isMenuOpened: false,
-  isModalOpened: false,
+  modalType: ModalType.NONE,
   isLoginValid: true,
   isPasswordValid: true,
   isPasswordShown: false,
@@ -25,7 +27,7 @@ const initialState = {
   tabType: TabType.DEPOSITS,
   currentCreditType: creditTypes.NONE,
   creditParametres: {},
-  isRequestOpened: true,
+  isRequestOpened: false,
   requestNumber: '0001',
 };
 
@@ -35,9 +37,9 @@ const ActionCreator = {
     type: ActionType.CHANGE_MENU_STATUS,
     payload: !status,
   }),
-  changeModalStatus: (status) => ({
-    type: ActionType.CHANGE_MODAL_STATUS,
-    payload: status,
+  changeModalType: (type) => ({
+    type: ActionType.CHANGE_MODAL_TYPE,
+    payload: type,
   }),
   changeCreditSelectStatus: (status) => ({
     type: ActionType.CHANGE_CREDIT_SELECT_STATUS,
@@ -71,6 +73,14 @@ const ActionCreator = {
     type: ActionType.UPDATE_CREDIT_PARAMETRES,
     payload: parametres,
   }),
+  increaseRequestNumber: (number) => ({
+    type: ActionType.INCREASE_REQEST_NUMBER,
+    payload: countRequestNumber(number),
+  }),
+  changeRequestStatus: (status) => ({
+    type: ActionType.CHANGE_REQEST_STATUS,
+    payload: status,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -79,9 +89,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         isMenuOpened: action.payload,
       });
-    case ActionType.CHANGE_MODAL_STATUS:
+    case ActionType.CHANGE_MODAL_TYPE:
       return extend(state, {
-        isModalOpened: action.payload,
+        modalType: action.payload,
       });
     case ActionType.CHANGE_CREDIT_SELECT_STATUS:
       return extend(state, {
@@ -115,6 +125,14 @@ const reducer = (state = initialState, action) => {
     case ActionType.UPDATE_CREDIT_PARAMETRES:
       return extend(state, {
         creditParametres: action.payload,
+      });
+    case ActionType.INCREASE_REQEST_NUMBER:
+      return extend(state, {
+        requestNumber: action.payload,
+      });
+    case ActionType.CHANGE_REQEST_STATUS:
+      return extend(state, {
+        isRequestOpened: action.payload,
       });
 
     default:

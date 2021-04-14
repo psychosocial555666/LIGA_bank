@@ -1,5 +1,5 @@
 .calculator__content {
-  padding: 40px 0;
+  padding: 40px 0 5px;
 
   h2 {
     width: 100%;
@@ -8,12 +8,12 @@
     line-height: 140%;
     padding: 0;
     margin: 0;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
   }
 }
 
 .calculator__parametres {
-  width: 51.283%;
+  width: 51.3%;
 }
 
 .calculator__wrapper {
@@ -34,16 +34,19 @@
 
 @media (max-width: $tablet) {
   .calculator__content {
-    padding: 30px 45px;
+    padding: 69px 45px 10px;
 
     h2 {
       font-size: 32px;
+      margin-bottom: 0;
     }
   }
 
   .calculator__step {
+    padding-top: 29px;
     h3 {
       font-size: 18px;
+      margin-bottom: 18px;
     }
   }
 
@@ -58,7 +61,7 @@
 
 @media (max-width: $mobile) {
   .calculator__content {
-    padding: 20px 15px;
+    padding: 54px 15px 20px;
 
     h2 {
       font-size: 22px;
@@ -66,8 +69,11 @@
   }
 
   .calculator__step {
+    padding-top: 22px;
+
     h3 {
       font-size: 16px;
+      margin-bottom: 14px;
     }
   }
 }

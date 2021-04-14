@@ -134,6 +134,7 @@ function Tabs(props) {
 
 Tabs.propTypes = {
   tabType: PropTypes.string,
+  onTabButtonClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

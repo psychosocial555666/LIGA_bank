@@ -37,6 +37,12 @@ export const TabType = {
   ONLINE: 'ONLINE',
 };
 
+export const ModalType = {
+  NONE: 'NONE',
+  LOGIN: 'LOGIN',
+  SUCCESS: 'SUCCESS',
+};
+
 export const menuItems = [
   'Услуги',
   'Рассчитать кредит',

@@ -1,5 +1,5 @@
 .map {
-  padding: 60px 0 110px;
+  padding: 96px 0 110px;
 
   h2 {
     font-weight: 700;
@@ -29,7 +29,7 @@
 
 @media (max-width: $tablet) {
   .map {
-    padding: 40px 45px 80px;
+    padding: 55px 45px 80px;
   
     h2 {
       font-size: 32px;
@@ -50,7 +50,7 @@
 
 @media (max-width: $mobile) {
   .map {
-    padding: 30px 15px 60px;
+    padding: 54px 15px 60px;
   
     h2 {
       font-size: 22px;

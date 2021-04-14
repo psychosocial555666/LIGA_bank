@@ -11,8 +11,8 @@ export const getTabType = (state) => {
   return state[NAME_SPACE].tabType;
 };
 
-export const getModalStatus = (state) => {
-  return state[NAME_SPACE].isModalOpened;
+export const getModalType = (state) => {
+  return state[NAME_SPACE].modalType;
 };
 
 export const getLoginStatus = (state) => {

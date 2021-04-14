@@ -4,17 +4,19 @@ import Services from "../services/services.jsx";
 import SimpleMap from "../map/map";
 import Modal from "../modal/modal";
 import {connect} from "react-redux";
-import {getModalStatus} from "../../reducer/ui/selectors";
+import {getModalType} from "../../reducer/ui/selectors";
 import Footer from "../footer/footer";
 import Calculator from "../calculator/calculator";
+import {ModalType} from "../../const";
+import PropTypes from 'prop-types';
 
 function App(props) {
 
-  const {isModalOpened} = props;
+  const {modalType} = props;
 
   return (
-    <div className={isModalOpened ? "app overlay" : "app"}>
-      {isModalOpened ? <Modal /> : ''}
+    <div className="app">
+      {modalType !== ModalType.NONE ? <Modal /> : ''}
       <Header />
       <Slider />
       <Services />
@@ -27,8 +29,12 @@ function App(props) {
   );
 };
 
+App.propTypes = {
+  modalType: PropTypes.string,
+};
+
 const mapStateToProps = (state) => ({
-  isModalOpened: getModalStatus(state),
+  modalType: getModalType(state),
 });
 
 export default connect(mapStateToProps, null)(App);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import marker from "../../../img/location.svg"
-import {pinCoords, SCREEN_LATITUDE, SCREEN_LONGITUDE} from "../../const.js"
+import marker from "../../../img/location.svg";
+import {pinCoords, SCREEN_LATITUDE, SCREEN_LONGITUDE} from "../../const.js";
 
 const AnyReactComponent = ({ source }) => <div className="map__pin"><img src={source} alt="marker"/></div>;
 
@@ -16,7 +16,7 @@ class SimpleMap extends Component {
 
   render() {
     return (
-      <section className="map">
+      <section className="map" id="map">
         <h2>Отделения Лига Банка</h2>
         <div className="map__wrapper">
           <GoogleMapReact

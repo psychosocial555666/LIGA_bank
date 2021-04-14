@@ -1,39 +1,22 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
-// export const characteristicsType = PropTypes.arrayOf(
-//   PropTypes.shape({
-//     name: PropTypes.string,
-//     value: PropTypes.string,
-//   }),
-// );
-
-// export const reviewsType = PropTypes.arrayOf(
-//   PropTypes.shape({
-//     id: PropTypes.number,
-//     author: PropTypes.string,
-//     advantages: PropTypes.string,
-//     disadvantages: PropTypes.string,
-//     comment: PropTypes.string,
-//     rating: PropTypes.string,
-//     date: PropTypes.date,
-//   }),
-// );
-
-// export const carType = PropTypes.shape({
-//   id: PropTypes.number,
-//   name: PropTypes.string,
-//   price: PropTypes.shape({
-//     prevPrice: PropTypes.string,
-//     currentPrice: PropTypes.string,
-//     creditPrice: PropTypes.string,
-//   }),
-//   shortCharacteristics: PropTypes.shape({
-//     fuel: PropTypes.string,
-//     transmission: PropTypes.string,
-//     power: PropTypes.string,
-//     engine: PropTypes.string,
-//   }),
-//   characteristics: characteristicsType,
-//   photos: PropTypes.arrayOf(PropTypes.string),
-//   reviews: reviewsType,
-// });
+export const parametresType = PropTypes.shape({
+  price: PropTypes.string,
+  priceStep: PropTypes.number,
+  minPrice: PropTypes.string,
+  maxPrice: PropTypes.string,
+  initialPercent: PropTypes.number,
+  minInitialPercent: PropTypes.number,
+  time: PropTypes.number,
+  minTime: PropTypes.number,
+  maxTime: PropTypes.number,
+  capital: PropTypes.oneOfType(PropTypes.bool, null),
+  casco: PropTypes.oneOfType(PropTypes.bool, null),
+  insurance: PropTypes.oneOfType(PropTypes.bool, null),
+  creditPercent: PropTypes.number,
+  minCreditSum: PropTypes.string,
+  creditSum: PropTypes.string,
+  payment: PropTypes.string,
+  income: PropTypes.string,
+  isOfferCorrect: PropTypes.bool,
+});

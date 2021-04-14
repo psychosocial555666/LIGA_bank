@@ -4,8 +4,10 @@ import {getCreditParametres, getCurrentCreditType} from "../../reducer/ui/select
 import {ActionCreator} from "../../reducer/ui/ui.js";
 import plus from "../../../img/plus.svg";
 import minus from "../../../img/minus.svg";
-import { creditTypes, MAX_PERCENT} from "../../const";
-import { maskThisValue, extend, increasePrice, reducePrice, checkValueValidity, returnCorrectValue, percentToSum, sumToPercent, returnMortgagePercent, returnMortgageSum, returnMonthlyCreditPercent, returnTimeInMonths, calculatePayment, calculateMinIncome, returnAutoPercent, returnAutoSum, maskThisTime } from "../../utils/utils";
+import {creditTypes, MAX_PERCENT} from "../../const";
+import {maskThisValue, extend, increasePrice, reducePrice, checkValueValidity, returnCorrectValue, percentToSum, sumToPercent, returnMortgagePercent, returnMortgageSum, returnMonthlyCreditPercent, returnTimeInMonths, calculatePayment, calculateMinIncome, returnAutoPercent, returnAutoSum, maskThisTime} from "../../utils/utils";
+import PropTypes from 'prop-types';
+import { parametresType } from "../../types";
 
 class StepTwo extends React.PureComponent {
   constructor(props) {
@@ -343,8 +345,14 @@ class StepTwo extends React.PureComponent {
         </div>
       </React.Fragment>
     );
-  }
-}
+  };
+};
+
+StepTwo.propTypes = {
+  creditParametres: parametresType,
+  currentCreditType: PropTypes.string,
+  updateCreditParametres: PropTypes.func,
+};
 
 const mapStateToProps = (state) => ({
   currentCreditType: getCurrentCreditType(state),

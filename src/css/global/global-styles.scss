@@ -84,6 +84,10 @@ body {
   display: block;
 }
 
+.container-horizontal >.swiper-pagination-bullets {
+  bottom: 35px;
+}
+
 @media (max-width: $tablet) {
   .container {
     padding: 0;
@@ -99,6 +103,10 @@ body {
 
   .desktop-only {
     display: none;
+  }
+
+  .container-horizontal >.swiper-pagination-bullets {
+    bottom: 11px;
   }
 }
 
@@ -119,5 +127,9 @@ body {
     font-size: 14px;
     line-height: 16px;
     padding: 13px 0 14px;
+  }
+
+  .container-horizontal >.swiper-pagination-bullets {
+    bottom: 6px;
   }
 }

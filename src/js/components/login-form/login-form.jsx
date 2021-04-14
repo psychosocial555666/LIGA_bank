@@ -22,6 +22,22 @@ class LoginForm extends React.PureComponent {
     this._isFormValid = this._isFormValid.bind(this);
   }
 
+  componentDidMount() {
+    let login = this.loginRef.current;
+    let password = this.passwordRef.current;
+
+    login.focus();
+
+    if(this.myStorage.login) {
+      login.value = this.myStorage.login;
+    };
+
+    
+    if(this.myStorage.password) {
+      password.value = this.myStorage.password;
+    };
+  }
+
   _isFormValid (login, password) {
     if(!login) {
       this.props.validateLogin(false);
@@ -50,6 +66,9 @@ class LoginForm extends React.PureComponent {
 
     if(this._isFormValid(login, password)) {
       this.props.closeButtonClickHandler(false);
+
+      this.myStorage.setItem('login', login);
+      this.myStorage.setItem('password', password);
     } else {
       this.props.validateLoginForm(false);
 
@@ -90,8 +109,12 @@ class LoginForm extends React.PureComponent {
 LoginForm.propTypes = {
   isLoginValid: PropTypes.bool,
   isPasswordValid: PropTypes.bool,
+  isPasswordShown: PropTypes.bool,
+  isLoginFormValid: PropTypes.bool,
   validateLogin: PropTypes.func,
   validatePassword: PropTypes.func,
+  showPassword: PropTypes.func,
+  validateLoginForm: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

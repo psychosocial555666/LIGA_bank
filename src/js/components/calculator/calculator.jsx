@@ -7,6 +7,7 @@ import Offer from "../offer/offer";
 import StepOne from "../step-one/step-one";
 import StepThree from "../step-three/step-three";
 import StepTwo from "../step-two/step-two";
+import PropTypes from 'prop-types';
 
 function Calculator(props) {
   const {
@@ -16,7 +17,7 @@ function Calculator(props) {
 
   return (
     <React.Fragment>
-      <section className="calculator">
+      <section className="calculator" id="calculator">
         <div className="container">
           <div className="calculator__content">
             <h2>Кредитный калькулятор</h2>
@@ -33,6 +34,12 @@ function Calculator(props) {
       </section>
     </React.Fragment>
   );
+};
+
+Calculator.propTypes = {
+  currentCreditType: PropTypes.string,
+  isRequestOpened: PropTypes.bool,
+  onTabButtonClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

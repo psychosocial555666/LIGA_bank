@@ -1,8 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import { creditTypes } from "../../const";
+import {creditTypes} from "../../const";
 import {getCreditSelectStatus, getCurrentCreditType} from "../../reducer/ui/selectors";
 import {ActionCreator} from "../../reducer/ui/ui.js";
+import PropTypes from 'prop-types';
 
 function StepOne(props) {
   const {isCreditTypeSelectOpened, currentCreditType, onOptionClick, onSelectClick} = props;
@@ -29,31 +30,36 @@ function StepOne(props) {
       <div className="calculator__step step-one">
         <h3>Шаг 1. Цель кредита</h3>
         <div className={isCreditTypeSelectOpened ? "step-one__control step-one__control--opened" : "step-one__control"}>
-          <p className="step-one__select" 
+          <button className="step-one__select" 
           onClick={() => {onSelectClick(isCreditTypeSelectOpened)}} 
-          tabIndex="1"
-          >{selectText}</p>
+          >{selectText}</button>
           <div className="step-one__options">
-            <span className="step-one__option" 
+            <button className="step-one__option" 
             onClick={() => {
                 onOptionClick(creditTypes.MORTGAGE);
                 onSelectClick(isCreditTypeSelectOpened);
               }}
-            tabIndex="1"
-            >Ипотечное кредитование</span>
-            <span className="step-one__option" 
+            >Ипотечное кредитование</button>
+            <button className="step-one__option" 
             onClick={() => {
               onOptionClick(creditTypes.AUTO);
               onSelectClick(isCreditTypeSelectOpened);
               }
             }
-            tabIndex="1"
-              >Автомобильное кредитование</span>
+              >Автомобильное кредитование</button>
           </div>
         </div>
       </div>
     </React.Fragment>
   );
+};
+
+
+StepOne.propTypes = {
+  isCreditTypeSelectOpened: PropTypes.bool,
+  currentCreditType: PropTypes.string,
+  onSelectClick: PropTypes.func,
+  onOptionClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

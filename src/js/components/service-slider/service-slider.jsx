@@ -11,7 +11,7 @@ import SwiperCore, {Pagination, Autoplay, EffectFade} from 'swiper';
 
 SwiperCore.use([Pagination, Autoplay, EffectFade]);
 
-function ServiceSlider(props) {
+function ServiceSlider() {
   return (
     <section className="services">
       <Swiper className="slider"

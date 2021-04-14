@@ -147,6 +147,15 @@ export const returnMortgagePercent = (initial) => {
   return initial >= 15 ? mortgagePercents.MIN : mortgagePercents.MAX;
 }
 
+export const countRequestNumber = (number) => {
+  let numberResult = String(Number(number) + 1);
+  let numberArr = numberResult.split('');
+  let maskArr = ['0', '0', '0', '0',];
+
+  let result = maskArr.slice(0, maskArr.length - numberArr.length).concat(numberArr).join('');
+  return result;
+}
+
 export const returnAutoPercent = (price, casco, insurance) => {
   if (casco && insurance) {
     return autoPercents.MIN;
