@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const parametresType = PropTypes.shape({
+export const parametersType = PropTypes.shape({
   price: PropTypes.string,
   priceStep: PropTypes.number,
   minPrice: PropTypes.string,
@@ -10,9 +10,9 @@ export const parametresType = PropTypes.shape({
   time: PropTypes.number,
   minTime: PropTypes.number,
   maxTime: PropTypes.number,
-  capital: PropTypes.oneOfType(PropTypes.bool, null),
-  casco: PropTypes.oneOfType(PropTypes.bool, null),
-  insurance: PropTypes.oneOfType(PropTypes.bool, null),
+  capital: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
+  casco: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
+  insurance: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([null])]),
   creditPercent: PropTypes.number,
   minCreditSum: PropTypes.string,
   creditSum: PropTypes.string,

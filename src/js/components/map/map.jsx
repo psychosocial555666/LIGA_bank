@@ -5,7 +5,7 @@ import {pinCoords, SCREEN_LATITUDE, SCREEN_LONGITUDE} from "../../const.js";
 
 const AnyReactComponent = ({ source }) => <div className="map__pin"><img src={source} alt="marker"/></div>;
 
-class SimpleMap extends Component {
+class Map extends Component {
   static defaultProps = {
     center: {
       lat: SCREEN_LATITUDE,
@@ -43,4 +43,4 @@ class SimpleMap extends Component {
   }
 };
 
-export default SimpleMap;
+export default Map;

@@ -6,7 +6,7 @@ import SwiperCore, {Pagination, Autoplay} from 'swiper';
 
 SwiperCore.use([Pagination, Autoplay]);
 
-function Slider(props) {
+function Slider() {
 
   return (
     <Swiper className="slider"

@@ -2,11 +2,11 @@ import React from "react";
 import {connect} from "react-redux";
 import InputMask from 'react-input-mask';
 import {creditTypes, ModalType} from "../../const";
-import {getCreditParametres, getCurrentCreditType, getRequestNumber} from "../../reducer/ui/selectors";
+import {getCreditParameters, getCurrentCreditType, getRequestNumber} from "../../reducer/ui/selectors";
 import {ActionCreator} from "../../reducer/ui/ui.js";
 import {maskThisTime, maskThisValue, percentToSum} from "../../utils/utils";
 import PropTypes from 'prop-types';
-import { parametresType } from "../../types";
+import { parametersType } from "../../types";
 
 class StepThree extends React.PureComponent {
 
@@ -88,7 +88,7 @@ class StepThree extends React.PureComponent {
     evt.preventDefault();
 
     const {
-      increseRequestNumber,
+      increaseRequestNumber,
       openPopup,
       closeRequest,
       requestNumber,
@@ -101,7 +101,7 @@ class StepThree extends React.PureComponent {
     let isFormValid = this._checkFormValidity();
 
     if(isFormValid) {
-      increseRequestNumber(requestNumber);
+      increaseRequestNumber(requestNumber);
       closeRequest(false);
       openPopup(ModalType.SUCCESS);
 
@@ -119,12 +119,12 @@ class StepThree extends React.PureComponent {
 
   render() {
 
-    const {creditParametres, currentCreditType, requestNumber} = this.props;
+    const {creditParameters, currentCreditType, requestNumber} = this.props;
     const {
       price,
       initialPercent,
       time,
-    } = creditParametres;
+    } = creditParameters;
 
     return (
       <React.Fragment>
@@ -204,7 +204,7 @@ class StepThree extends React.PureComponent {
 }
 
 StepThree.propTypes = {
-  creditParametres: parametresType,
+  creditParameters: parametersType,
   currentCreditType: PropTypes.string,
   requestNumber: PropTypes.string,
   increaseRequestNumber: PropTypes.func,
@@ -214,12 +214,12 @@ StepThree.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentCreditType: getCurrentCreditType(state),
-  creditParametres: getCreditParametres(state),
+  creditParameters: getCreditParameters(state),
   requestNumber: getRequestNumber(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  increseRequestNumber(number) {
+  increaseRequestNumber(number) {
     dispatch(ActionCreator.increaseRequestNumber(number));
   },
   closeRequest(status) {

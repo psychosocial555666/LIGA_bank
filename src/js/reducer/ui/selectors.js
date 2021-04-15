@@ -39,8 +39,8 @@ export const getCurrentCreditType = (state) => {
   return state[NAME_SPACE].currentCreditType;
 };
 
-export const getCreditParametres = (state) => {
-  return state[NAME_SPACE].creditParametres;
+export const getCreditParameters = (state) => {
+  return state[NAME_SPACE].creditParameters;
 };
 
 export const getRequestNumber = (state) => {

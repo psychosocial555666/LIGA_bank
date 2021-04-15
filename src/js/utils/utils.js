@@ -4,7 +4,7 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const initiateParametres = (type) => {
+export const initiateParameters = (type) => {
   if (type === creditTypes.MORTGAGE) {
     return (
       {

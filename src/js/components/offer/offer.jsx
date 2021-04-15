@@ -2,14 +2,14 @@ import React from "react";
 import {connect} from "react-redux";
 import {creditTypes} from "../../const";
 import {ActionCreator} from "../../reducer/ui/ui.js";
-import {getCreditParametres, getCurrentCreditType} from "../../reducer/ui/selectors";
+import {getCreditParameters, getCurrentCreditType} from "../../reducer/ui/selectors";
 import {maskThisValue} from "../../utils/utils";
 import PropTypes from 'prop-types';
-import {parametresType} from "../../types";
+import {parametersType} from "../../types";
 
 function Offer(props) {
-  const {currentCreditType, creditParametres, openRequest} = props;
-  const {creditSum, creditPercent, payment, income, isOfferCorrect, minCreditSum} = creditParametres;
+  const {currentCreditType, creditParameters, openRequest} = props;
+  const {creditSum, creditPercent, payment, income, isOfferCorrect, minCreditSum} = creditParameters;
   return (
     <React.Fragment>
       {isOfferCorrect ? 
@@ -52,12 +52,12 @@ function Offer(props) {
 
 Offer.propTypes = {
   currentCreditType: PropTypes.string,
-  creditParametres: parametresType,
+  creditParameters: parametersType,
 };
 
 const mapStateToProps = (state) => ({
   currentCreditType: getCurrentCreditType(state),
-  creditParametres: getCreditParametres(state),
+  creditParameters: getCreditParameters(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

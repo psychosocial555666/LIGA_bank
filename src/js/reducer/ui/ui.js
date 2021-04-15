@@ -1,5 +1,5 @@
 import { creditTypes, ModalType, TabType } from "../../const.js";
-import { countRequestNumber, extend, initiateParametres } from "./../../utils/utils.js";
+import { countRequestNumber, extend, initiateParameters } from "./../../utils/utils.js";
 
 const ActionType = {
   CHANGE_MENU_STATUS: `CHANGE_MENU_STATUS`,
@@ -12,8 +12,8 @@ const ActionType = {
   SET_TAB_TYPE: `SET_TAB_TYPE`,
   SET_CREDIT_TYPE: `SET_CREDIT_TYPE`,
   UPDATE_CREDIT_PARAMETRES: `UPDATE_CREDIT_PARAMETRES`,
-  INCREASE_REQEST_NUMBER: 'INCREASE_REQEST_NUMBER',
-  CHANGE_REQEST_STATUS: `CHANGE_REQEST_STATUS`,
+  INCREASE_REQUEST_NUMBER: 'INCREASE_REQUEST_NUMBER',
+  CHANGE_REQUEST_STATUS: `CHANGE_REQUEST_STATUS`,
 };
 
 const initialState = {
@@ -26,7 +26,7 @@ const initialState = {
   isCreditTypeSelectOpened: false,
   tabType: TabType.DEPOSITS,
   currentCreditType: creditTypes.NONE,
-  creditParametres: {},
+  creditParameters: {},
   isRequestOpened: false,
   requestNumber: '0001',
 };
@@ -69,16 +69,16 @@ const ActionCreator = {
     type: ActionType.SET_CREDIT_TYPE,
     payload: type,
   }),
-  updateCreditParametres: (parametres) => ({
+  updateCreditParameters: (parameters) => ({
     type: ActionType.UPDATE_CREDIT_PARAMETRES,
-    payload: parametres,
+    payload: parameters,
   }),
   increaseRequestNumber: (number) => ({
-    type: ActionType.INCREASE_REQEST_NUMBER,
+    type: ActionType.INCREASE_REQUEST_NUMBER,
     payload: countRequestNumber(number),
   }),
   changeRequestStatus: (status) => ({
-    type: ActionType.CHANGE_REQEST_STATUS,
+    type: ActionType.CHANGE_REQUEST_STATUS,
     payload: status,
   }),
 };
@@ -104,7 +104,7 @@ const reducer = (state = initialState, action) => {
     case ActionType.SET_CREDIT_TYPE:
       return extend(state, {
         currentCreditType: action.payload,
-        creditParametres: initiateParametres(action.payload),
+        creditParameters: initiateParameters(action.payload),
       });
     case ActionType.CHANGE_LOGIN_VALIDITY:
       return extend(state, {
@@ -124,13 +124,13 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.UPDATE_CREDIT_PARAMETRES:
       return extend(state, {
-        creditParametres: action.payload,
+        creditParameters: action.payload,
       });
-    case ActionType.INCREASE_REQEST_NUMBER:
+    case ActionType.INCREASE_REQUEST_NUMBER:
       return extend(state, {
         requestNumber: action.payload,
       });
-    case ActionType.CHANGE_REQEST_STATUS:
+    case ActionType.CHANGE_REQUEST_STATUS:
       return extend(state, {
         isRequestOpened: action.payload,
       });

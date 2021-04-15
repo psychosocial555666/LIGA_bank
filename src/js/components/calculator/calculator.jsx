@@ -22,7 +22,7 @@ function Calculator(props) {
           <div className="calculator__content">
             <h2>Кредитный калькулятор</h2>
             <div className="calculator__wrapper">
-              <div className="calculator__parametres">
+              <div className="calculator__parameters">
                 <StepOne />
                 {currentCreditType === creditTypes.NONE ? '' : <StepTwo />}
               </div>

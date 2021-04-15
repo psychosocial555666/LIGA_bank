@@ -1,13 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getCreditParametres, getCurrentCreditType} from "../../reducer/ui/selectors";
+import {getCreditParameters, getCurrentCreditType} from "../../reducer/ui/selectors";
 import {ActionCreator} from "../../reducer/ui/ui.js";
 import plus from "../../../img/plus.svg";
 import minus from "../../../img/minus.svg";
 import {creditTypes, MAX_PERCENT} from "../../const";
 import {maskThisValue, extend, increasePrice, reducePrice, checkValueValidity, returnCorrectValue, percentToSum, sumToPercent, returnMortgagePercent, returnMortgageSum, returnMonthlyCreditPercent, returnTimeInMonths, calculatePayment, calculateMinIncome, returnAutoPercent, returnAutoSum, maskThisTime} from "../../utils/utils";
 import PropTypes from 'prop-types';
-import { parametresType } from "../../types";
+import { parametersType } from "../../types";
 
 class StepTwo extends React.PureComponent {
   constructor(props) {
@@ -33,12 +33,12 @@ class StepTwo extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {creditParametres} = this.props;
+    const {creditParameters} = this.props;
     const {
       price,
       initialPercent,
       time,
-    } = creditParametres;
+    } = creditParameters;
     this.priceRef.current.value = maskThisValue(price, ` рублей`);
     this._countInitialSum();
     this.persentInputRef.current.value = maskThisValue(String(this.initialSum), ` рублей`);
@@ -48,12 +48,12 @@ class StepTwo extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const {creditParametres} = this.props;
+    const {creditParameters} = this.props;
     const {
       price,
       initialPercent,
       time,
-    } = creditParametres;
+    } = creditParameters;
 
     this.priceRef.current.value = maskThisValue(price, ` рублей`);
     this.priceRef.current.parentNode.parentNode.classList.remove('step-two__item--invalid');
@@ -67,8 +67,8 @@ class StepTwo extends React.PureComponent {
   }
 
   _updateCalculator(updatedParametr) {
-    const {creditParametres, currentCreditType} = this.props;
-    const updatedParametres = extend(creditParametres, updatedParametr);
+    const {creditParameters, currentCreditType} = this.props;
+    const updatedParameters = extend(creditParameters, updatedParametr);
     const {
       price,
       initialPercent,
@@ -77,7 +77,7 @@ class StepTwo extends React.PureComponent {
       capital,
       casco,
       insurance,
-    } = updatedParametres;
+    } = updatedParameters;
 
     return this._calculateCreditOffer(currentCreditType, price, initialPercent, time, minCreditSum, capital, casco, insurance);
   }
@@ -136,21 +136,21 @@ class StepTwo extends React.PureComponent {
     }
   }
 
-  _applyNewParametres(parametr) {
-    const {creditParametres, updateCreditParametres}= this.props;
+  _applyNewParameters(parametr) {
+    const {creditParameters, updateCreditParameters}= this.props;
 
-    let newParametres = extend(creditParametres, extend(this._updateCalculator(parametr), parametr));
-    updateCreditParametres(newParametres);
+    let newParameters = extend(creditParameters, extend(this._updateCalculator(parametr), parametr));
+    updateCreditParameters(newParameters);
   }
 
   _priceButtonIncreaseHandler(value, step, maxValue) {
     let result = increasePrice(value, step, maxValue);
-    this._applyNewParametres({price: result});
+    this._applyNewParameters({price: result});
   }
 
   _priceButtonReduceHandler(value, step, minValue) {
     let result = reducePrice(value, step, minValue);
-    this._applyNewParametres({price: result});
+    this._applyNewParameters({price: result});
   }
 
   _keyPressHandler(evt) {
@@ -169,14 +169,14 @@ class StepTwo extends React.PureComponent {
     let value = evt.target.value;
 
     let result = returnCorrectValue(value, minValue, maxValue);
-    this._applyNewParametres({price: result});
+    this._applyNewParameters({price: result});
   }
 
   _initialInputBlurHandler(evt, minValue, maxValue, price) {
     let value = evt.target.value;
 
     let result = returnCorrectValue(value, minValue, maxValue);
-    this._applyNewParametres({
+    this._applyNewParameters({
       initialPercent: sumToPercent(price, result)
     });
   }
@@ -185,47 +185,47 @@ class StepTwo extends React.PureComponent {
     let value = evt.target.value;
 
     let result = returnCorrectValue(value, minValue, maxValue);
-    this._applyNewParametres({
+    this._applyNewParameters({
       time: result,
     });
   }
 
   _initialSliderChangeHandler(evt) {
-    this._applyNewParametres({
+    this._applyNewParameters({
       initialPercent: Number(evt.target.value)
     });
   }
 
   _timeSliderChangeHandler(evt) {
-    this._applyNewParametres({
+    this._applyNewParameters({
       time: Number(evt.target.value)
     });
   }
 
   _capitalCheckboxChangeHandler(evt) {
-    this._applyNewParametres({
+    this._applyNewParameters({
       capital: evt.target.checked,
     });
   }
 
   _cascoCheckboxChangeHandler(evt) {
-    this._applyNewParametres({
+    this._applyNewParameters({
       casco: evt.target.checked,
     });
   }
 
   _insuranceCheckboxChangeHandler(evt) {
-    this._applyNewParametres({
+    this._applyNewParameters({
       insurance: evt.target.checked,
     });
   }
 
   _countInitialSum() {
-    this.initialSum = percentToSum(this.props.creditParametres.price, this.props.creditParametres.initialPercent);
+    this.initialSum = percentToSum(this.props.creditParameters.price, this.props.creditParameters.initialPercent);
   }
 
   render() {
-    const {creditParametres, currentCreditType} = this.props;
+    const {creditParameters, currentCreditType} = this.props;
     const {
       price,
       priceStep,
@@ -236,7 +236,7 @@ class StepTwo extends React.PureComponent {
       time,
       minTime,
       maxTime,
-    } = creditParametres;
+    } = creditParameters;
 
     return (
       <React.Fragment>
@@ -349,19 +349,19 @@ class StepTwo extends React.PureComponent {
 };
 
 StepTwo.propTypes = {
-  creditParametres: parametresType,
+  creditParameters: parametersType,
   currentCreditType: PropTypes.string,
-  updateCreditParametres: PropTypes.func,
+  updateCreditParameters: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
   currentCreditType: getCurrentCreditType(state),
-  creditParametres: getCreditParametres(state),
+  creditParameters: getCreditParameters(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  updateCreditParametres(parametres) {
-    dispatch(ActionCreator.updateCreditParametres(parametres));
+  updateCreditParameters(parameters) {
+    dispatch(ActionCreator.updateCreditParameters(parameters));
   },
 });
 
