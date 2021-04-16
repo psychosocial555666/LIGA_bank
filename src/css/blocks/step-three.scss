@@ -2,6 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  padding-top: 32px;
+  margin-bottom: 38px;
 }
 
 .step-three__content {
@@ -147,10 +149,11 @@
 @media (max-width: $tablet) {
   .step-three {
     padding-top: 0;
+    margin-bottom: 0;
   }
 
   .step-three__content {
-    padding: 14px 45px;
+    padding: 40px 45px 14px;
     background-color: $white;
     width: 100%;
 
@@ -162,7 +165,7 @@
   }
 
   .step-three__input {
-    width: 324px;
+    width: 47.8%;
   }
 
   .step-three__input--name {
@@ -176,7 +179,7 @@
 
 @media (max-width: $mobile) {
   .step-three__content {
-    padding: 0 15px;
+    padding: 22px 15px;
 
     h3 {
       font-size: 16px;

@@ -84,8 +84,8 @@ body {
   display: block;
 }
 
-.container-horizontal >.swiper-pagination-bullets {
-  bottom: 35px;
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 35px !important;
 }
 
 @media (max-width: $tablet) {
@@ -105,8 +105,8 @@ body {
     display: none;
   }
 
-  .container-horizontal >.swiper-pagination-bullets {
-    bottom: 11px;
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: 11px !important;
   }
 }
 
@@ -129,7 +129,7 @@ body {
     padding: 13px 0 14px;
   }
 
-  .container-horizontal >.swiper-pagination-bullets {
-    bottom: 6px;
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: 6px !important;
   }
 }

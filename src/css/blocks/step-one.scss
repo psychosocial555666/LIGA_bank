@@ -1,3 +1,7 @@
+.step-one {
+  margin-bottom: 33px;
+}
+
 .step-one__control {
   width: 100%;
   position: relative;
@@ -80,6 +84,12 @@
 
   .step-one__options {
     display: flex;
+  }
+}
+
+@media (max-width: $tablet) {
+  .step-one {
+    margin-bottom: 5px;
   }
 }
 
